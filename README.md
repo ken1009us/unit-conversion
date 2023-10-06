@@ -78,7 +78,7 @@ $ pytest unit-conversion
 
 ### Project Origin
 
-This project was initially conceptualized and created as a part of an assignment at PhysIQ. It was provided by my former manager, Nick Flink, as a foundational codebase. The objective was to develop a comprehensive unit conversion service that is versatile, efficient, and user-friendly.
+This is an open source project initiated at PhysIQ. The objective was to develop a comprehensive unit conversion service that is versatile, efficient, and user-friendly.
 
 ### Personal Contribution
 I took the initiative to enhance and complete the project independently. These efforts were aimed at optimizing the service’s performance, extending its functionality, and ensuring its adaptability to diverse unit conversion needs.
