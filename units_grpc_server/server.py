@@ -28,28 +28,10 @@ class ConversionServer():
 
 
 class ConversionServiceImpl(units_pb2_grpc.UnitConversionServiceServicer):
-    # def Handler(self, request, context):
-    #     return units_pb2.UnitConversionResponse
-
-    # def ErrorHandler(self, request, context):
-    #     raise RuntimeError('Some Error')
-
     def ConvertUnit(self, request, context):
         response = convert_units(request)
 
         return response
-
-
-# server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
-
-# units_pb2_grpc.add_UnitConversionServiceServicer_to_server(ConversionServiceImpl(), server)
-
-# print('Starting server. Listening on port 50051...')
-# server.add_insecure_port('[::]:50051')
-# server.start()
-
-# if os.environ.get('TEST_ENV') != 'test':
-#     server.wait_for_termination()
 
 
 if __name__ == "__main__":
