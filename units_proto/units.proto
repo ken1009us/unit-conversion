@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package units_proto;
+
+message UnitConversionRequest {
+  string from_unit = 1;
+  string to_unit = 2;
+  double value = 3;
+}
+
+message UnitConversionResponse {
+  double converted_value = 1;
+  string error = 2;
+}
+
+service UnitConversionService {
+  rpc ConvertUnit (
+    UnitConversionRequest
+  ) returns (
+    UnitConversionResponse);
+}
+
