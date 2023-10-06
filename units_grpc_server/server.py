@@ -11,6 +11,7 @@ from units_proto import units_pb2
 from units_proto import units_pb2_grpc
 from units_proto_extensions.extensions import convert_units
 
+
 class ConversionServer():
     def __init__(self):
         self.server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
