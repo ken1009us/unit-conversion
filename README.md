@@ -1,4 +1,11 @@
-# Units Conversion System
+# Units Conversion Service
+
+The Unit Conversion Service is a sophisticated, user-friendly, and efficient software solution designed to facilitate seamless and accurate conversions between various units of measurement. This project is meticulously crafted to cater to the needs of engineers, scientists, students, and professionals who frequently encounter the necessity to convert units in their daily tasks or complex projects.
+
+## Technology Integration
+
+- gRPC Protocol: Utilize gRPC for efficient, fast, and reliable communication between clients and servers.
+- Pint Library: Leverage the Pint library for handling unit conversions, ensuring a robust and reliable conversion mechanism.
 
 ## Prerequisites
 - Python
@@ -66,3 +73,15 @@ Run the tests using pytest:
 ```bash
 $ pytest unit-conversion
 ```
+
+## Acknowledgements
+
+### Project Origin
+
+This project was initially conceptualized and created as a part of an assignment at PhysIQ. It was provided by my former manager, Nick Flink, as a foundational codebase. The objective was to develop a comprehensive unit conversion service that is versatile, efficient, and user-friendly.
+
+### Personal Contribution
+I took the initiative to enhance and complete the project independently. These efforts were aimed at optimizing the service’s performance, extending its functionality, and ensuring its adaptability to diverse unit conversion needs.
+
+### Disclaimer
+This project is a new version of the original code and does not represent the entirety of the work done at PhysIQ. It is a demonstration of my individual contributions and enhancements made to improve the project's functionality and performance.
