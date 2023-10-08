@@ -12,11 +12,3 @@ message UnitConversionResponse {
   double converted_value = 1;
   string error = 2;
 }
-
-service UnitConversionService {
-  rpc ConvertUnit (
-    UnitConversionRequest
-  ) returns (
-    UnitConversionResponse);
-}
-
