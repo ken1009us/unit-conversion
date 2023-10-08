@@ -1,7 +1,6 @@
 import pytest
 import pint.errors
 
-from pathlib import Path
 from units_core.units import Units
 
 
