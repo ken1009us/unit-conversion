@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package units_grpc_stub;
+
+import "units_proto/units.proto";
+
+
+service UnitConversionService {
+  rpc ConvertUnit (
+    units_proto.UnitConversionRequest
+  ) returns (
+    units_proto.UnitConversionResponse);
+}
