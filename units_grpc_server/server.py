@@ -8,8 +8,8 @@ myproject_directory = os.path.join(current_directory, '..')
 sys.path.append(myproject_directory)
 
 from concurrent import futures
-from units_proto import units_pb2
-from units_proto import units_pb2_grpc
+from units_grpc_stub import conversion_service_pb2
+from units_grpc_stub import conversion_service_pb2_grpc
 from units_proto_extensions.extensions import convert_units
 
 
@@ -37,7 +37,7 @@ class ConversionServer():
         Constructs all the necessary attributes for the ConversionServer object.
         """
         self.server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
-        units_pb2_grpc.add_UnitConversionServiceServicer_to_server(
+        conversion_service_pb2_grpc.add_UnitConversionServiceServicer_to_server(
             ConversionServiceImpl(), self.server)
         self.server.add_insecure_port('[::]:50051')
 
@@ -52,7 +52,7 @@ class ConversionServer():
         self.server.stop(0)
 
 
-class ConversionServiceImpl(units_pb2_grpc.UnitConversionServiceServicer):
+class ConversionServiceImpl(conversion_service_pb2_grpc.UnitConversionServiceServicer):
     """
     A class to represent the gRPC service implementation for unit conversions.
 
@@ -69,11 +69,11 @@ class ConversionServiceImpl(units_pb2_grpc.UnitConversionServiceServicer):
         Converts units based on the provided request.
 
         Parameters:
-        - request (units_pb2.UnitConversionRequest): The request containing the value, from_unit, and to_unit.
+        - request (conversion_service_pb2.UnitConversionRequest): The request containing the value, from_unit, and to_unit.
         - context (grpc.ServicerContext): The context of the gRPC request.
 
         Returns:
-        - units_pb2.UnitConversionResponse: The response containing the converted value.
+        - conversion_service_pb2.UnitConversionResponse: The response containing the converted value.
         """
 
         try:
@@ -84,7 +84,7 @@ class ConversionServiceImpl(units_pb2_grpc.UnitConversionServiceServicer):
             print(f"Error occurred: {e}")
             context.set_code(grpc.StatusCode.INTERNAL)
             context.set_details(str(e))
-            return units_pb2.UnitConversionResponse()
+            return conversion_service_pb2.UnitConversionResponse()
 
 
 if __name__ == "__main__":
