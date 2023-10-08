@@ -31,6 +31,14 @@ $ pip install -r requirements.txt
 
 ## Usage
 
+Generate Protobuf and gRPC code:
+
+The 'Makefile' that simplifies the process of generating Protobuf and gRPC code. You can use the following commands:
+
+```bash
+make all
+```
+
 Start the gRPC server:
 
 ```bash
@@ -41,7 +49,7 @@ $ python server.py
 In a new terminal, use the client script to convert units:
 
 ```bash
-$ cd tests
+$ cd client
 $ python client.py
 ```
 
@@ -61,9 +69,10 @@ Example conversions.json:
 ## Files
 
 - server.py: The gRPC server script that handles unit conversion requests.
-- client.py: A client script to test the gRPC server.
+- client.py: A client script to convert the units using the gRPC server.
 - units_core/: A directory containing the core unit conversion logic.
-- units_proto/: Contains the Protocol Buffers and gRPC service definitions.
+- units_proto/: Contains the Protocol Buffers definitions.
+- units-grpc-stub/: Hold services pertaining to units and unit conversion.
 - config/conversions.json: A JSON file for defining custom units.
 
 ## Testing
