@@ -1,14 +1,16 @@
-import sys
-import os
 import json
+import os
 import re
+import sys
 
 current_directory = os.path.dirname(os.path.realpath(__file__))
 myproject_directory = os.path.join(current_directory, '..')
 sys.path.append(myproject_directory)
 
 from pathlib import Path
-from units_proto.units_pb2 import UnitConversionRequest, UnitConversionResponse
+from units_grpc_stub import conversion_service_pb2
+
+
 from units_core.units import Units
 
 
@@ -16,6 +18,7 @@ units_converter = Units()
 
 project_root = Path(__file__).resolve().parents[2]
 file_path = project_root / 'unit-conversion' / 'config' / 'conversions.json'
+
 with open(file_path, 'r') as file:
     custom_units = json.load(file)
     for object, definition in custom_units.items():
@@ -33,8 +36,22 @@ with open(file_path, 'r') as file:
         print(f"Defined {unit_name} = {definition}")
 
 
-def convert_units(request: UnitConversionRequest) -> UnitConversionResponse:
-    response = UnitConversionResponse()
+def convert_units(request: conversion_service_pb2.units__proto_dot_units__pb2.UnitConversionRequest) -> conversion_service_pb2.units__proto_dot_units__pb2.UnitConversionResponse:
+    """
+    Convert units from the provided request.
+
+    Parameters:
+    - request (UnitConversionRequest): The request containing the value, from_unit, and to_unit.
+
+    Returns:
+    - UnitConversionResponse: The response containing the converted value or an error message.
+
+    Raises:
+    - ValueError: If there is an issue with the provided value or units.
+    - Exception: For general exceptions not caught by specific error handling.
+    """
+
+    response = conversion_service_pb2.units__proto_dot_units__pb2.UnitConversionResponse()
 
     try:
         converted_value = units_converter.convert(request.value, request.from_unit, request.to_unit)
