@@ -1,3 +1,13 @@
+"""
+This module provides the Units class for handling unit conversions using the Pint library.
+
+The Units class encapsulates the functionality of the Pint library,
+offering a simplified interface for converting values between different units of measurement.
+It handles various types of units and ensures that conversions are
+accurate and consistent.
+
+"""
+
 from pint import UnitRegistry, UndefinedUnitError, DimensionalityError
 
 class Units:

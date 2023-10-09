@@ -1,7 +1,20 @@
-import grpc
+"""
+This module contains the implementation of a gRPC server for unit conversions.
+
+The server is implemented using the grpc library
+and is designed to handle unit conversion requests.
+It listens on a specified port for incoming requests
+and processes them using the provided service implementation.
+The server can be started and stopped manually,
+and it handles the termination signals for graceful shutdown.
+
+"""
+
 import os
 import signal
 import sys
+from concurrent import futures
+import grpc
 
 current_directory = os.path.dirname(os.path.realpath(__file__))
 myproject_directory = os.path.join(current_directory, '..')

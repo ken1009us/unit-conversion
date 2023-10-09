@@ -1,3 +1,14 @@
+"""
+This module is responsible for handling unit conversions,
+including custom unit definitions and conversions.
+
+It reads custom unit definitions from a JSON file and adds them to the unit registry.
+The module also contains a function to convert units based on a given request,
+handling various exceptions that might occur during the conversion
+process.
+
+"""
+
 import json
 import os
 import re
