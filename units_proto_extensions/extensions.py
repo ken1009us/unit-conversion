@@ -15,6 +15,7 @@ import re
 import sys
 
 from pathlib import Path
+from pint import errors
 from units_grpc_stub import conversion_service_pb2
 from units_core.units import Units
 
@@ -40,8 +41,14 @@ with open(file_path, 'r', encoding="utf-8") as file:
             unit_name = base_unit_name
         else:
             unit_name = obj
-        units_converter.unit_registry.define(f'{unit_name} = {definition}')
-        print(f"Defined {unit_name} = {definition}")
+
+        try:
+            units_converter.unit_registry(unit_name)
+            print(f"Unit {unit_name} is already defined.")
+
+        except errors.UndefinedUnitError:
+            units_converter.unit_registry.define(f'{unit_name} = {definition}')
+            print(f"Defined {unit_name} = {definition}")
 
 
 def convert_units(request: conversion_service_pb2.units__proto_dot_units__pb2.UnitConversionRequest
