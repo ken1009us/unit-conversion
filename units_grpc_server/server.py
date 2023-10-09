@@ -7,9 +7,7 @@ current_directory = os.path.dirname(os.path.realpath(__file__))
 myproject_directory = os.path.join(current_directory, '..')
 sys.path.append(myproject_directory)
 
-from concurrent import futures
-from units_grpc_stub import conversion_service_pb2
-from units_grpc_stub import conversion_service_pb2_grpc
+from units_grpc_stub import conversion_service_pb2, conversion_service_pb2_grpc
 from units_proto_extensions.extensions import convert_units
 
 
@@ -69,11 +67,13 @@ class ConversionServiceImpl(conversion_service_pb2_grpc.UnitConversionServiceSer
         Converts units based on the provided request.
 
         Parameters:
-        - request (conversion_service_pb2.UnitConversionRequest): The request containing the value, from_unit, and to_unit.
+        - request (conversion_service_pb2.UnitConversionRequest):
+            The request containing the value, from_unit, and to_unit.
         - context (grpc.ServicerContext): The context of the gRPC request.
 
         Returns:
-        - conversion_service_pb2.UnitConversionResponse: The response containing the converted value.
+        - conversion_service_pb2.UnitConversionResponse:
+            The response containing the converted value.
         """
 
         try:

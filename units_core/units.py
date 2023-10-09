@@ -35,7 +35,7 @@ class Units:
             return converted_value
 
         except UndefinedUnitError as e:
-            print(f"Error: The unit '{to_unit}' is not defined.")
+            print(f"Error: The unit '{to_unit}' is not defined. {e}")
             raise
 
         except DimensionalityError as e:

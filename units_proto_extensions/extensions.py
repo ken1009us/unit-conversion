@@ -3,26 +3,23 @@ import os
 import re
 import sys
 
+from pathlib import Path
+from units_grpc_stub import conversion_service_pb2
+from units_core.units import Units
+
 current_directory = os.path.dirname(os.path.realpath(__file__))
 myproject_directory = os.path.join(current_directory, '..')
 sys.path.append(myproject_directory)
-
-from pathlib import Path
-from units_grpc_stub import conversion_service_pb2
-
-
-from units_core.units import Units
-
 
 units_converter = Units()
 
 project_root = Path(__file__).resolve().parents[2]
 file_path = project_root / 'unit-conversion' / 'config' / 'conversions.json'
 
-with open(file_path, 'r') as file:
+with open(file_path, 'r', encoding="utf-8") as file:
     custom_units = json.load(file)
-    for object, definition in custom_units.items():
-        match = re.match(r'(\d+)([a-zA-Z]+)', object)
+    for obj, definition in custom_units.items():
+        match = re.match(r'(\d+)([a-zA-Z]+)', obj)
         if match:
             prefix, base_unit_name = match.groups()
             factor = int(prefix)
@@ -31,12 +28,13 @@ with open(file_path, 'r') as file:
             definition = f'{base_definition} / {num}'
             unit_name = base_unit_name
         else:
-            unit_name = object
+            unit_name = obj
         units_converter.unit_registry.define(f'{unit_name} = {definition}')
         print(f"Defined {unit_name} = {definition}")
 
 
-def convert_units(request: conversion_service_pb2.units__proto_dot_units__pb2.UnitConversionRequest) -> conversion_service_pb2.units__proto_dot_units__pb2.UnitConversionResponse:
+def convert_units(request: conversion_service_pb2.units__proto_dot_units__pb2.UnitConversionRequest
+                  ) -> conversion_service_pb2.units__proto_dot_units__pb2.UnitConversionResponse:
     """
     Convert units from the provided request.
 

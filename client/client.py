@@ -1,13 +1,18 @@
-import grpc
+"""
+Client Module for Unit Conversion Service
+
+"""
+
 import os
 import sys
+import grpc
+
 
 current_directory = os.path.dirname(os.path.realpath(__file__))
 myproject_directory = os.path.join(current_directory, '..')
 sys.path.append(myproject_directory)
 
-from units_grpc_stub import conversion_service_pb2
-from units_grpc_stub import conversion_service_pb2_grpc
+from units_grpc_stub import conversion_service_pb2, conversion_service_pb2_grpc
 
 
 def run():
@@ -35,7 +40,8 @@ def test_standard_units(stub):
     Tests the conversion of standard units.
 
     Parameters:
-    - stub (conversion_service_pb2_grpc.UnitConversionServiceStub): The stub to make requests to the gRPC server.
+    - stub (conversion_service_pb2_grpc.UnitConversionServiceStub):
+        The stub to make requests to the gRPC server.
 
     Handles any raised exceptions during the conversion process and prints the converted value.
     """
@@ -47,7 +53,7 @@ def test_standard_units(stub):
 
         response = stub.ConvertUnit(request)
 
-        print('Converted value (standard units): ', response.converted_value)
+        print(f'Converted {request.from_unit} to {request.to_unit}. Value: {response.converted_value}')
 
     except grpc.RpcError as e:
         print(f"An error occurred during the RPC call: {e}")
@@ -60,7 +66,8 @@ def test_custom_units(stub):
     Tests the conversion of custom units.
 
     Parameters:
-    - stub (conversion_service_pb2_grpc.UnitConversionServiceStub): The stub to make requests to the gRPC server.
+    - stub (conversion_service_pb2_grpc.UnitConversionServiceStub):
+        The stub to make requests to the gRPC server.
 
     Handles any raised exceptions during the conversion process and prints the converted value.
     """
@@ -72,7 +79,7 @@ def test_custom_units(stub):
 
         response = stub.ConvertUnit(request)
 
-        print('Converted value (custom units): ', response.converted_value)
+        print(f'Converted {request.from_unit} to {request.to_unit}. Value: {response.converted_value}')
 
     except grpc.RpcError as e:
         print(f"An error occurred during the RPC call: {e}")
